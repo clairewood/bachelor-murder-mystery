@@ -1,0 +1,65 @@
+from db import (Room, yard)
+
+commands = {
+    "directions": ["n", "north", "s", "south", "e", "east", "w","west"],
+    "quit": ["q", "quit"],
+    "inventory": ["inventory"],
+    "interact": ["talk, look around"]
+}
+
+
+# # # MAP # # #
+
+# [yard]---------[pool]----------[bar]
+#    |             |               |
+# [bunk #1]---[MAIN ROOM]---[producer's lounge]
+#    |             |               |
+# [bunk #2]----[bathroom]---[bachelor's bedroom]
+
+
+# # # MAIN GAME LOOP # # #
+
+def game_loop(player_name, room, murdered_yet):
+    print("\r")
+    print(f"You are in the {room.name}.")
+    print(f"{room.desc}")
+    print("\r")
+    print("You can type 'inventory' anytime to pull that up, or type "
+          "n / north or the other cardinal directions to move around the mansion.")
+    directions = {room.north:"north", room.east:"east", room.south:"south", room.west:"west"}
+    for key in list(directions.keys()):
+        if key is not None:
+            print(f"To the {directions[key]} is {directions[key]},")
+    go_to = input("")
+
+    # else:
+    #     print("\r")
+    #     print("Sorry, that wasn't an option!")
+    #     game_loop(player_name)
+
+# # # START GAME # # #
+
+def start_game(player_name):
+    """
+    Opening sequence
+    """
+    print("\r")
+    print("The party's raging inside. You think you can see the Bachelor himself in there. "
+          "Wait, that's weird. I thought they were going to greet me when I rolled up in my limo."
+          "Fuck. I wore this duck costume for nothing.")
+    print("Whatever.")
+
+    game_loop(player_name, yard, False) # TODO: get room names fixed
+
+def main():
+    """
+    Intro
+    """
+    player_name = input("Welcome to the game! What's your name? > ")
+    print(f"Congratulations, {player_name.upper()}! You've been selected to be a contestant on The Bachelor!")
+
+    start_game(player_name)
+
+
+if __name__ == '__main__':
+    main()
