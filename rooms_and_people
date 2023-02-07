@@ -1,0 +1,45 @@
+
+# # # ROOMS # # #
+
+# # # MAP:
+
+# [yard]---------[pool]----------[bar]
+#    |             |               |
+# [bunk #1]---[MAIN ROOM]---[producer's lounge]
+#    |             |               |
+# [bunk #2]----[bathroom]---[bachelor's bedroom]
+
+# # # ROOMS # # #
+
+class Room:
+    """Creates a room in the game"""
+    code: int
+    name: str
+    north: "Room"
+    east: "Room"
+    south: "Room"
+    west: "Room"
+    def __init__(self, code, name, desc, north=None, east=None, south=None, west=None):
+        self.code = code
+        self.name = name
+        self.desc = desc # room description
+        # self.options = options
+
+        if north:
+            north.south = self
+        if east:
+            east.west = self
+        if south:
+            south.north = self
+        if west:
+            west.east = self
+
+        def go_to(self, direction):
+            if next_room := self.current_room.go_to(direction):
+                self.current_room = next_room
+            return next_room
+
+
+# # # YARD
+yard_desc = ("You're in the yard I guess")
+yard = Room(0, "Yard", None, yard_desc, "Pool", "Bunkroom 1", None)
