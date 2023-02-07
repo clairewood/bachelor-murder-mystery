@@ -1,4 +1,4 @@
-from db import (Room, yard)
+from rooms_and_people import (Room, yard)
 
 commands = {
     "directions": ["n", "north", "s", "south", "e", "east", "w","west"],
